@@ -110,6 +110,7 @@
         emptyView.backgroundColor = self.backgroundColor;
         if (self.customEmptyView)
         {
+            self.customEmptyView.center = emptyView.center;
             [emptyView addSubview:self.customEmptyView];
         }
         else
