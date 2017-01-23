@@ -1,0 +1,8 @@
+platform:'ios','7.0'
+
+target 'CTTableViewEmpty' do
+
+pod 'MJRefresh', '~> 3.1.12'
+
+
+end
