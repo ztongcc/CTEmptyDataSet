@@ -1,32 +1,33 @@
 //
-//  TableController.m
+//  TableTwoController.m
 //  CTTableViewEmpty
 //
-//  Created by Admin on 2017/1/22.
+//  Created by Admin on 2017/1/23.
 //  Copyright © 2017年 Arvin. All rights reserved.
 //
 
-#import "TableController.h"
+#import "TableTwoController.h"
 #import <MJRefresh/MJRefresh.h>
 #import "UITableView+Empty.h"
-#import "TableTwoController.h"
 
-@interface TableController ()<UITableViewDelegate, UITableViewDataSource>
+
+@interface TableTwoController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UITableView *table;
 @property (nonatomic, assign)NSInteger row;
 
 @end
 
-@implementation TableController
+@implementation TableTwoController
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.title = @"TableView";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.table.emptyImage = [UIImage imageNamed:@"TableView_EmptyIcon"];
-
+    self.table.emptyViewEnable = NO;
+    
     [self.view addSubview:self.table];
     _row = 0;
     self.table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -35,14 +36,14 @@
         [self.table reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
         
     }];
-
+    
     self.table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         _row ++;
         [self.table.mj_footer endRefreshing];
         [self.table reloadData];
     }];
     self.table.tableFooterView = [UIView new];
-
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -65,14 +66,6 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    TableTwoController * tableVC = [[TableTwoController alloc] init];
-    [self.navigationController pushViewController:tableVC animated:YES];
-
-}
-
 - (UITableView *)table
 {
     if (_table == nil) {
@@ -83,4 +76,5 @@
     }
     return _table;
 }
+
 @end

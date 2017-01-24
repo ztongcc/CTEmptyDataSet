@@ -10,12 +10,12 @@
 
 @interface UICollectionView (Empty)
 
-@property (nonatomic, assign) BOOL emptyViewEnable UI_APPEARANCE_SELECTOR;
+@property (nonatomic, assign) BOOL      emptyViewEnable UI_APPEARANCE_SELECTOR;
 
-@property (nonatomic, strong) UIImage * emptyImage UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIImage * emptyImage      UI_APPEARANCE_SELECTOR;
 
-@property (nonatomic, assign) CGFloat offsetCenterY UI_APPEARANCE_SELECTOR;
+@property (nonatomic, assign) CGFloat   offsetCenterY   UI_APPEARANCE_SELECTOR;
 
-@property (nonatomic, strong) UIView * customEmptyView;
+@property (nonatomic, strong) UIView *  customEmptyView UI_APPEARANCE_SELECTOR;
 
 @end

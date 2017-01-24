@@ -20,6 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"CollectionView";
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.collView];
     

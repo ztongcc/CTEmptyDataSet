@@ -1,12 +1,24 @@
 PODS:
+  - CTEmptyDataSet (0.0.1)
   - MJRefresh (3.1.12)
 
 DEPENDENCIES:
+  - CTEmptyDataSet (from `https://github.com/Excalibur-CT/CTEmptyDataSet.git`)
   - MJRefresh (~> 3.1.12)
 
+EXTERNAL SOURCES:
+  CTEmptyDataSet:
+    :git: https://github.com/Excalibur-CT/CTEmptyDataSet.git
+
+CHECKOUT OPTIONS:
+  CTEmptyDataSet:
+    :commit: 9e752b5e2bfb7236e94a73f42c12bba24072523a
+    :git: https://github.com/Excalibur-CT/CTEmptyDataSet.git
+
 SPEC CHECKSUMS:
+  CTEmptyDataSet: 1f55f3a6792cef58bb77a23bbd524ce887e92418
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
 
-PODFILE CHECKSUM: c2f427ba39e96b9f8ef2e7bb5883149d1ceaab04
+PODFILE CHECKSUM: 9d00761926bf40bebd639a35954edb706514996a
 
 COCOAPODS: 1.1.1

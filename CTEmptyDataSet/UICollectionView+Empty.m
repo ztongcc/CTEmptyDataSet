@@ -108,18 +108,16 @@
     {
         emptyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds)+CGRectGetMinY(self.bounds))];
         emptyView.backgroundColor = self.backgroundColor;
+        CGPoint center = CGPointMake(emptyView.center.x, emptyView.center.y+self.offsetCenterY);
+
         if (self.customEmptyView)
         {
-            self.customEmptyView.center = emptyView.center;
+            self.customEmptyView.center = center;
             [emptyView addSubview:self.customEmptyView];
         }
         else
         {
             CGFloat offset = self.offsetCenterY;
-            if (offset == 0)
-            {
-                offset = [[UICollectionView appearance] offsetCenterY];
-            }
             if (self.emptyImage)
             {
                 CGSize size = self.emptyImage.size;
@@ -128,7 +126,7 @@
                 emptyIM.backgroundColor = [UIColor clearColor];
                 emptyIM.contentMode = UIViewContentModeScaleAspectFill;
                 emptyIM.image = self.emptyImage;
-                emptyIM.center = CGPointMake(emptyView.center.x, emptyView.center.y+offset);
+                emptyIM.center = center;
                 [emptyView addSubview:emptyIM];
             }
             else
@@ -137,7 +135,7 @@
                 lab.text = @"~ 暂无内容 ~";
                 lab.textColor = [UIColor lightGrayColor];
                 [lab sizeToFit];
-                lab.center = CGPointMake(emptyView.center.x, emptyView.center.y+offset);
+                lab.center = center;
                 [emptyView addSubview:lab];
             }
         }

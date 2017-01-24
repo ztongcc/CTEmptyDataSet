@@ -10,6 +10,7 @@
 #import <MJRefresh/MJRefresh.h>
 #import "TableController.h"
 #import "CollectionController.h"
+#import "TableThreeController.h"
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -23,7 +24,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.dataAry = @[@"TableView",@"CollectionView"];
+    self.title = @"EmptyDataSet";
+    self.dataAry = @[@"TableView",@"CollectionView",@"CustomView"];
     [self.view addSubview:self.table];
 }
 
@@ -51,11 +53,17 @@
         TableController * tableVC = [[TableController alloc] init];
         [self.navigationController pushViewController:tableVC animated:YES];
     }
+    else if ([text isEqualToString:@"CustomView"])
+    {
+        TableThreeController * tableVC = [[TableThreeController alloc] init];
+        [self.navigationController pushViewController:tableVC animated:YES];
+    }
     else
     {
         CollectionController * collVC = [[CollectionController alloc] init];
         [self.navigationController pushViewController:collVC animated:YES];
     }
+    
 }
 
 - (UITableView *)table

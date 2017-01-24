@@ -3,6 +3,7 @@ platform:'ios','7.0'
 target 'CTTableViewEmpty' do
 
 pod 'MJRefresh', '~> 3.1.12'
+pod 'CTEmptyDataSet', :git=>'https://github.com/Excalibur-CT/CTEmptyDataSet.git'
 
 
 end
