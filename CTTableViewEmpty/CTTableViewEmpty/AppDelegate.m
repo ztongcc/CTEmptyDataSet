@@ -8,9 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import "UITableView+Empty.h"
-#import "UICollectionView+Empty.h"
-
+#import ""
 @interface AppDelegate ()
 
 @end
@@ -22,6 +20,7 @@
 {
     [[UITableView appearance] setEmptyImage:[UIImage imageNamed:@"emptyImage"]];
     [[UITableView appearance] setEmptyViewEnable:YES];
+
     
     [[UICollectionView appearance] setEmptyImage:[UIImage imageNamed:@"emptyImage"]];
     [[UICollectionView appearance] setEmptyViewEnable:YES];
@@ -35,6 +34,29 @@
     navi.navigationBar.translucent = NO;
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (UIView *)emptyView
+{
+    UIView * aView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 200)];
+    
+    UILabel * lab = [[UILabel alloc] init];
+    lab.text = @"网络异常, 请重试!";
+    [lab sizeToFit];
+    [aView addSubview:lab];
+    lab.center = CGPointMake(150, 50);
+    
+    UIButton * btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    btn.frame = CGRectMake(30, 100, 240, 40);
+    btn.layer.cornerRadius = 5;
+    btn.layer.borderColor = [UIColor blackColor].CGColor;
+    btn.layer.borderWidth = 1;
+    [btn setTitle:@"重试" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    btn.backgroundColor = [UIColor whiteColor];
+//    [btn addTarget:self action:@selector(tapAction) forControlEvents:UIControlEventTouchUpInside];
+    [aView addSubview:btn];
+    return aView;
 }
 
 

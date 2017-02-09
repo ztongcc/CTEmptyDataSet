@@ -1,15 +1,16 @@
+
 //
-//  UICollectionView+Empty.m
-//  CTTableViewEmpty
+//  UIScrollView+Empty.m
+//  Pods
 //
-//  Created by Admin on 2017/1/23.
-//  Copyright © 2017年 Arvin. All rights reserved.
+//  Created by Admin on 2017/2/9.
+//
 //
 
-#import "UICollectionView+Empty.h"
+#import "UIScrollView+Empty.h"
 #import <objc/runtime.h>
 
-@implementation UICollectionView (Empty)
+@implementation UIScrollView (Empty)
 
 + (void)load
 {
@@ -17,7 +18,19 @@
     dispatch_once(&onceToken, ^{
         
         [[self class] swizzledSelector:@selector(reloadData)
-                            toSelector:@selector(empty_reloadData)
+                            toSelector:@selector(empty_reloadCollectionData)
+                               inClass:[UITableView class]];
+        
+        [[self class] swizzledSelector:@selector(reloadSections:withRowAnimation:)
+                            toSelector:@selector(empty_reloadSections:withRowAnimation:)
+                               inClass:[UITableView class]];
+        
+        [[self class] swizzledSelector:@selector(reloadRowsAtIndexPaths:withRowAnimation:)
+                            toSelector:@selector(empty_reloadRowsAtIndexPaths:withRowAnimation:)
+                               inClass:[UITableView class]];
+        
+        [[self class] swizzledSelector:@selector(reloadData)
+                            toSelector:@selector(empty_reloadTableData)
                                inClass:[UICollectionView class]];
         
         [[self class] swizzledSelector:@selector(reloadSections:)
@@ -27,6 +40,8 @@
         [[self class] swizzledSelector:@selector(reloadItemsAtIndexPaths:)
                             toSelector:@selector(empty_reloadItemsAtIndexPaths:)
                                inClass:[UICollectionView class]];
+        
+        
     });
 }
 
@@ -48,6 +63,7 @@
     }
 }
 
+#pragma mark - setter getter method -
 - (NSInteger)emptyViewEnableType
 {
     return [objc_getAssociatedObject(self, _cmd) integerValue];
@@ -101,6 +117,51 @@
     objc_setAssociatedObject(self, @selector(offsetCenterY), @(offsetCenterY), OBJC_ASSOCIATION_ASSIGN);
 }
 
+#pragma mark - Collection method -
+- (void)empty_reloadCollectionData
+{
+    [self empty_reloadCollectionData];
+    
+    [self autoDispayEmptyView];
+}
+
+- (void)empty_reloadSections:(NSIndexSet *)sections;
+{
+    [self empty_reloadSections:sections];
+    
+    [self autoDispayEmptyView];
+}
+
+- (void)empty_reloadItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths
+{
+    [self empty_reloadItemsAtIndexPaths:indexPaths];
+    
+    [self autoDispayEmptyView];
+}
+
+#pragma mark - tableView method -
+- (void)empty_reloadTableData
+{
+    [self empty_reloadTableData];
+    
+    [self autoDispayEmptyView];
+}
+
+- (void)empty_reloadSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)animation
+{
+    [self empty_reloadSections:sections withRowAnimation:animation];
+    
+    [self autoDispayEmptyView];
+}
+
+- (void)empty_reloadRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation
+{
+    [self empty_reloadRowsAtIndexPaths:indexPaths withRowAnimation:animation];
+    
+    [self autoDispayEmptyView];
+}
+
+#pragma mark - commom metnod -
 - (UIView *)displayView
 {
     UIView * emptyView = objc_getAssociatedObject(self, _cmd);
@@ -109,7 +170,7 @@
         emptyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds)+CGRectGetMinY(self.bounds))];
         emptyView.backgroundColor = self.backgroundColor;
         CGPoint center = CGPointMake(emptyView.center.x, emptyView.center.y+self.offsetCenterY);
-
+        
         if (self.customEmptyView)
         {
             self.customEmptyView.center = center;
@@ -145,25 +206,38 @@
     return emptyView;
 }
 
-- (void)empty_reloadData
+- (BOOL)isEmptyOfDataSource
 {
-    [self empty_reloadData];
-    
-    [self autoDispayEmptyView];
-}
-
-- (void)empty_reloadSections:(NSIndexSet *)sections;
-{
-    [self empty_reloadSections:sections];
-    
-    [self autoDispayEmptyView];
-}
-
-- (void)empty_reloadItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths
-{
-    [self empty_reloadItemsAtIndexPaths:indexPaths];
-    
-    [self autoDispayEmptyView];
+    BOOL isNoData = YES;
+    if ([self isKindOfClass:[UICollectionView class]])
+    {
+        UICollectionView * collectionView = (UICollectionView *)self;
+        NSInteger section = collectionView.numberOfSections;
+        for (int i = 0; i < section; i++)
+        {
+            NSInteger rows = [collectionView numberOfItemsInSection:i];
+            if (rows != 0)
+            {
+                isNoData = NO;
+                break;
+            }
+        }
+    }
+    else if ([self isKindOfClass:[UITableView class]])
+    {
+        UITableView * tableView = (UITableView *)self;
+        NSInteger section = tableView.numberOfSections;
+        for (int i = 0; i < section; i++)
+        {
+            NSInteger rows = [tableView numberOfRowsInSection:i];
+            if (rows != 0)
+            {
+                isNoData = NO;
+                break;
+            }
+        }
+    }
+    return isNoData;
 }
 
 - (void)autoDispayEmptyView
@@ -179,18 +253,7 @@
             return;
         }
     }
-    BOOL isNoData = YES;
-    NSInteger section = self.numberOfSections;
-    for (int i = 0; i < section; i++)
-    {
-        NSInteger rows = [self numberOfItemsInSection:i];
-        if (rows != 0)
-        {
-            isNoData = NO;
-            break;
-        }
-    }
-    if (isNoData)
+    if ([self isEmptyOfDataSource])
     {
         if (![self.subviews containsObject:[self displayView]])
         {

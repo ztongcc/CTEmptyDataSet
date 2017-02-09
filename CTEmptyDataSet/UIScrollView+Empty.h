@@ -1,14 +1,14 @@
 //
-//  UICollectionView+Empty.h
-//  CTTableViewEmpty
+//  UIScrollView+Empty.h
+//  Pods
 //
-//  Created by Admin on 2017/1/23.
-//  Copyright © 2017年 Arvin. All rights reserved.
+//  Created by Admin on 2017/2/9.
+//
 //
 
 #import <UIKit/UIKit.h>
 
-@interface UICollectionView (Empty)
+@interface UIScrollView (Empty)
 
 @property (nonatomic, assign) BOOL      emptyViewEnable UI_APPEARANCE_SELECTOR;
 
