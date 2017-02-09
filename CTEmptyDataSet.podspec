@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '7.0'
   s.requires_arc = true
 
-  s.public_header_files = 'CTEmptyDataSet/{UITableView,UICollectionView}+Empty.h'
-  s.source_files = 'CTEmptyDataSet/{UITableView,UICollectionView}+Empty.{h,m}'
+  s.public_header_files = 'CTEmptyDataSet/UIScrollView+Empty.h'
+  s.source_files = 'CTEmptyDataSet/UIScrollView+Empty.{h,m}'
 
   s.frameworks   = 'Foundation', 'UIKit'
 

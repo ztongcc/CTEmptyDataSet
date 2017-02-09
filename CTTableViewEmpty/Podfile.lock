@@ -12,7 +12,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   CTEmptyDataSet:
-    :commit: 9e752b5e2bfb7236e94a73f42c12bba24072523a
+    :commit: b11ae29799fd15f469aab63a48faf54cd37383ea
     :git: https://github.com/Excalibur-CT/CTEmptyDataSet.git
 
 SPEC CHECKSUMS:
