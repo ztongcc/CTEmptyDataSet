@@ -8,6 +8,7 @@
 
 #import "CollectionController.h"
 #import <MJRefresh.h>
+
 @interface CollectionController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (nonatomic, strong)UICollectionView * collView;
@@ -38,7 +39,6 @@
         [self.collView.mj_footer endRefreshing];
         [self.collView reloadData];
     }];
-
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section

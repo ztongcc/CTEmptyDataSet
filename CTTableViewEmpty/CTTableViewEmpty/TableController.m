@@ -8,7 +8,7 @@
 
 #import "TableController.h"
 #import <MJRefresh/MJRefresh.h>
-#import "UITableView+Empty.h"
+#import "UIScrollView+Empty.h"
 #import "TableTwoController.h"
 
 @interface TableController ()<UITableViewDelegate, UITableViewDataSource>
@@ -25,8 +25,8 @@
     [super viewDidLoad];
     self.title = @"TableView";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.table.emptyImage = [UIImage imageNamed:@"TableView_EmptyIcon"];
-
+    self.table.empty_dispalyImage = [UIImage imageNamed:@"TableView_EmptyIcon"];
+    self.table.empty_scrollEnable = NO;
     [self.view addSubview:self.table];
     _row = 0;
     self.table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{

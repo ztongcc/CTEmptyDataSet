@@ -8,8 +8,7 @@
 
 #import "TableTwoController.h"
 #import <MJRefresh/MJRefresh.h>
-#import "UITableView+Empty.h"
-
+#import <UIScrollView+Empty.h>
 
 @interface TableTwoController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -26,7 +25,7 @@
     [super viewDidLoad];
     self.title = @"TableView";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.table.emptyViewEnable = NO;
+    self.table.empty_enable = NO;
     
     [self.view addSubview:self.table];
     _row = 0;

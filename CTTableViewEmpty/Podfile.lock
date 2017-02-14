@@ -12,11 +12,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   CTEmptyDataSet:
-    :commit: b11ae29799fd15f469aab63a48faf54cd37383ea
+    :commit: 2812a784a4b02c1a8795f2018acb9393600b6a70
     :git: https://github.com/Excalibur-CT/CTEmptyDataSet.git
 
 SPEC CHECKSUMS:
-  CTEmptyDataSet: 1f55f3a6792cef58bb77a23bbd524ce887e92418
+  CTEmptyDataSet: 7dc3648b7a71a933db1781b0c4226230ecc0095b
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
 
 PODFILE CHECKSUM: 9d00761926bf40bebd639a35954edb706514996a

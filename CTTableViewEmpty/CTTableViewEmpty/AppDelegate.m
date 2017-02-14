@@ -8,7 +8,8 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import ""
+#import <UIScrollView+Empty.h>
+
 @interface AppDelegate ()
 
 @end
@@ -18,12 +19,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[UITableView appearance] setEmptyImage:[UIImage imageNamed:@"emptyImage"]];
-    [[UITableView appearance] setEmptyViewEnable:YES];
-
+    [[UITableView appearance] setEmpty_dispalyImage:[UIImage imageNamed:@"emptyImage"]];
     
-    [[UICollectionView appearance] setEmptyImage:[UIImage imageNamed:@"emptyImage"]];
-    [[UICollectionView appearance] setEmptyViewEnable:YES];
+    [[UICollectionView appearance] setEmpty_dispalyImage:[UIImage imageNamed:@"emptyImage"]];
     
     
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];

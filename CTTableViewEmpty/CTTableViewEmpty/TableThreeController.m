@@ -8,7 +8,8 @@
 
 #import "TableThreeController.h"
 #import <MJRefresh/MJRefresh.h>
-#import "UITableView+Empty.h"
+
+#import <UIScrollView+Empty.h>
 
 @interface TableThreeController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -24,8 +25,8 @@
     [super viewDidLoad];
     self.title = @"TableView";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.table.offsetCenterY = -100;
-    self.table.customEmptyView = [self emptyView];
+    self.table.empty_offsetCenterY = -100;
+    self.table.empty_customView = [self emptyView];
     [self.view addSubview:self.table];
     _row = 0;
     self.table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
