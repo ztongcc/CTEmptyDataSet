@@ -36,6 +36,10 @@
                             toSelector:@selector(empty_reloadTableData)
                                inClass:[UITableView class]];
         
+        [[self class] swizzledSelector:@selector(endUpdates)
+                            toSelector:@selector(empty_endUpdates)
+                               inClass:[UITableView class]];
+        
         [[self class] swizzledSelector:@selector(reloadSections:withRowAnimation:)
                             toSelector:@selector(empty_reloadSections:withRowAnimation:)
                                inClass:[UITableView class]];
@@ -180,9 +184,9 @@
     return [objc_getAssociatedObject(self, _cmd) integerValue];
 }
 
-- (void)setEmpty_dispalyType:(CTEmptyDispalyType)empty_dispalyType
+- (void)setEmpty_dispalyType:(CTEmptyDispalyType)dispalyType
 {
-    objc_setAssociatedObject(self, @selector(empty_dispalyType), @(empty_dispalyType), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, @selector(empty_dispalyType), @(dispalyType), OBJC_ASSOCIATION_ASSIGN);
 }
 
 - (CGFloat)empty_verticalSpace
@@ -190,9 +194,19 @@
     return [objc_getAssociatedObject(self, _cmd) floatValue];
 }
 
-- (void)setEmpty_verticalSpace:(CGFloat)empty_verticalSpace
+- (void)setEmpty_verticalSpace:(CGFloat)verticalSpace
 {
-    objc_setAssociatedObject(self, @selector(empty_verticalSpace), @(empty_verticalSpace), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, @selector(empty_verticalSpace), @(verticalSpace), OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (dispatch_block_t)empty_tapBlock
+{
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setEmpty_tapBlock:(dispatch_block_t)tapBlock
+{
+    objc_setAssociatedObject(self, @selector(empty_tapBlock), tapBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 #pragma mark - Collection method -
@@ -249,6 +263,13 @@
 - (void)empty_reloadTableData
 {
     [self empty_reloadTableData];
+    
+    [self autoDispayEmptyView];
+}
+
+- (void)empty_endUpdates
+{
+    [self empty_endUpdates];
     
     [self autoDispayEmptyView];
 }
@@ -437,6 +458,10 @@
         emptyView.backgroundColor = self.backgroundColor;
         CGPoint center = CGPointMake(emptyView.center.x, emptyView.center.y+self.empty_offsetCenterY);
         UIView * contentView;
+        
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tabBackAction)];
+        [emptyView addGestureRecognizer:tap];
+        
         if (self.empty_dispalyType != CTDispalyDefaultType)
         {
             contentView = [self specialDisplayContentWithCenter:center];
@@ -450,6 +475,13 @@
         objc_setAssociatedObject(self, @selector(displayView), emptyView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return emptyView;
+}
+
+- (void)tabBackAction
+{
+    if (self.empty_tapBlock) {
+        self.empty_tapBlock();
+    }
 }
 
 - (BOOL)isEmptyOfDataSource

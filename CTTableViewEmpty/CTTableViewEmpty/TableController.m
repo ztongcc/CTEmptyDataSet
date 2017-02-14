@@ -9,7 +9,6 @@
 #import "TableController.h"
 #import <MJRefresh/MJRefresh.h>
 #import "UIScrollView+Empty.h"
-#import "TableTwoController.h"
 
 @interface TableController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -25,9 +24,15 @@
     [super viewDidLoad];
     self.title = @"TableView";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.table.empty_dispalyImage = [UIImage imageNamed:@"TableView_EmptyIcon"];
-    self.table.empty_scrollEnable = NO;
+    __weak typeof(self) weakSelf = self;
+    self.table.empty_offsetCenterY = -100;
+    [self.table setEmpty_tapBlock:^{
+        weakSelf.row++;
+        [weakSelf.table reloadData];
+    }];
+    self.table.empty_dispalyImage = [UIImage imageNamed:@"emptyImage"];
     [self.view addSubview:self.table];
+    
     _row = 0;
     self.table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         _row = 0;
@@ -65,12 +70,24 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    TableTwoController * tableVC = [[TableTwoController alloc] init];
-    [self.navigationController pushViewController:tableVC animated:YES];
+    return YES;
+}
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        self.row--;
+        [self.table beginUpdates];
+        [self.table deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self.table endUpdates];
+    }
 }
 
 - (UITableView *)table

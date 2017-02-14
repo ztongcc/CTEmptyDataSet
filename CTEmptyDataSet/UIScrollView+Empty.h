@@ -40,6 +40,10 @@ typedef NS_ENUM(NSInteger, CTEmptyDispalyType)
 @property (nonatomic, assign) CTEmptyDispalyType empty_dispalyType;
 
 /*
+ *  点击空白页面时回调Block
+ */
+@property (nonatomic,   copy) dispatch_block_t empty_tapBlock;
+/*
  *  无数据时,需要展示的图片
  */
 @property (nonatomic, strong) UIImage * empty_dispalyImage  UI_APPEARANCE_SELECTOR;

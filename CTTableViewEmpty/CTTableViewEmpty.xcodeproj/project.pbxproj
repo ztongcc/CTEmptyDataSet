@@ -11,9 +11,6 @@
 		845438C91E34AD79007C8FEE /* emptyImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845438C81E34AD79007C8FEE /* emptyImage@2x.png */; };
 		845438CC1E34B91B007C8FEE /* TableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 845438CB1E34B91B007C8FEE /* TableController.m */; };
 		8454E3B21E35DC97007D2A84 /* CollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454E3B11E35DC97007D2A84 /* CollectionController.m */; };
-		8454E3C01E360530007D2A84 /* TableView_EmptyIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8454E3BF1E360530007D2A84 /* TableView_EmptyIcon@2x.png */; };
-		8454E3C31E360960007D2A84 /* TableTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8454E3C21E360960007D2A84 /* TableTwoController.m */; };
-		8476C5B41E36EF9300D67D44 /* TableThreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8476C5B31E36EF9300D67D44 /* TableThreeController.m */; };
 		84EADEB61E32094C00468799 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EADEB51E32094C00468799 /* main.m */; };
 		84EADEB91E32094C00468799 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EADEB81E32094C00468799 /* AppDelegate.m */; };
 		84EADEBC1E32094C00468799 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EADEBB1E32094C00468799 /* ViewController.m */; };
@@ -30,11 +27,6 @@
 		845438CB1E34B91B007C8FEE /* TableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableController.m; sourceTree = "<group>"; };
 		8454E3B01E35DC97007D2A84 /* CollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionController.h; sourceTree = "<group>"; };
 		8454E3B11E35DC97007D2A84 /* CollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionController.m; sourceTree = "<group>"; };
-		8454E3BF1E360530007D2A84 /* TableView_EmptyIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TableView_EmptyIcon@2x.png"; sourceTree = "<group>"; };
-		8454E3C11E360960007D2A84 /* TableTwoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableTwoController.h; sourceTree = "<group>"; };
-		8454E3C21E360960007D2A84 /* TableTwoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableTwoController.m; sourceTree = "<group>"; };
-		8476C5B21E36EF9300D67D44 /* TableThreeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableThreeController.h; sourceTree = "<group>"; };
-		8476C5B31E36EF9300D67D44 /* TableThreeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableThreeController.m; sourceTree = "<group>"; };
 		84EADEB11E32094C00468799 /* CTTableViewEmpty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTTableViewEmpty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84EADEB51E32094C00468799 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		84EADEB71E32094C00468799 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -94,14 +86,9 @@
 				84EADEBB1E32094C00468799 /* ViewController.m */,
 				845438CA1E34B91B007C8FEE /* TableController.h */,
 				845438CB1E34B91B007C8FEE /* TableController.m */,
-				8476C5B21E36EF9300D67D44 /* TableThreeController.h */,
-				8476C5B31E36EF9300D67D44 /* TableThreeController.m */,
-				8454E3C11E360960007D2A84 /* TableTwoController.h */,
-				8454E3C21E360960007D2A84 /* TableTwoController.m */,
 				8454E3B01E35DC97007D2A84 /* CollectionController.h */,
 				8454E3B11E35DC97007D2A84 /* CollectionController.m */,
 				845438C81E34AD79007C8FEE /* emptyImage@2x.png */,
-				8454E3BF1E360530007D2A84 /* TableView_EmptyIcon@2x.png */,
 				84EADEC01E32094C00468799 /* Assets.xcassets */,
 				84EADEC21E32094C00468799 /* LaunchScreen.storyboard */,
 				84EADEC51E32094C00468799 /* Info.plist */,
@@ -188,7 +175,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				84EADEC41E32094C00468799 /* LaunchScreen.storyboard in Resources */,
-				8454E3C01E360530007D2A84 /* TableView_EmptyIcon@2x.png in Resources */,
 				84EADEC11E32094C00468799 /* Assets.xcassets in Resources */,
 				845438C91E34AD79007C8FEE /* emptyImage@2x.png in Resources */,
 			);
@@ -254,8 +240,6 @@
 				84EADEB91E32094C00468799 /* AppDelegate.m in Sources */,
 				845438CC1E34B91B007C8FEE /* TableController.m in Sources */,
 				84EADEB61E32094C00468799 /* main.m in Sources */,
-				8476C5B41E36EF9300D67D44 /* TableThreeController.m in Sources */,
-				8454E3C31E360960007D2A84 /* TableTwoController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
