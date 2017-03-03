@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "CTEmptyDataSet"
-  s.version      = "0.0.1"
+  s.version      = "1.0.0"
   s.summary      = "UITableView 和 UICollectionView的扩展"
   s.description  = <<-DESC
                      UITableView 和 UICollectionView的扩展

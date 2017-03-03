@@ -7,9 +7,9 @@
 //
 
 #import "ViewController.h"
-#import <MJRefresh/MJRefresh.h>
 #import "TableController.h"
 #import "CollectionController.h"
+#import "UIScrollView+Empty.h"
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -25,6 +25,8 @@
     [super viewDidLoad];
     self.title = @"EmptyDataSet";
     self.dataAry = @[@"TableView",@"CollectionView"];
+    [self.table setEmptyDispalyImage:[UIImage imageNamed:@"emptyImage"] status:CTDispalyNetErrorType];
+
     [self.view addSubview:self.table];
 }
 

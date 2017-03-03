@@ -19,11 +19,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[UITableView appearance] setEmpty_dispalyImage:[UIImage imageNamed:@"emptyImage"]];
-    
-    [[UICollectionView appearance] setEmpty_dispalyImage:[UIImage imageNamed:@"emptyImage"]];
-    
-    
+    [[UITableView appearance] setEmptyDispalyImage:[UIImage imageNamed:@"emptyImage"] status:CTDispalyLoadingStatus];
+ 
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     ViewController * vc = [[ViewController alloc] init];
