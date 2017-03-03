@@ -23,20 +23,14 @@
 #define EMPTY_B(__VIEW__)  CGRectGetMaxY(__VIEW__.frame)
 
 
-#define NORMAL_KEY   @"normal"
-#define LOADING_KEY  @"loading"
-#define NETERROR_KEY @"netError"
-
-
-
 @interface UIScrollView ()
 
-@property (nonatomic, strong)NSMutableDictionary * imageDict   UI_APPEARANCE_SELECTOR;
-@property (nonatomic, strong)NSMutableDictionary * viewDict    UI_APPEARANCE_SELECTOR;
-@property (nonatomic, strong)NSMutableDictionary * textDict    UI_APPEARANCE_SELECTOR;
-@property (nonatomic, strong)NSMutableDictionary * offsetYDict UI_APPEARANCE_SELECTOR;
-@property (nonatomic, strong)NSMutableDictionary * spaceVDict  UI_APPEARANCE_SELECTOR;
-@property (nonatomic, strong)NSMutableDictionary * typeDict  UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong)NSMutableDictionary * ct_Image_Dict    UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong)NSMutableDictionary * ct_View_Dict     UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong)NSMutableDictionary * ct_Text_Dict     UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong)NSMutableDictionary * ct_OffsetY_Dict  UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong)NSMutableDictionary * ct_Space_V_Dict  UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong)NSMutableDictionary * ct_Type_Dict     UI_APPEARANCE_SELECTOR;
 
 @property (nonatomic, assign)CTDispalyStatus  dispalyStatus;
 
@@ -114,94 +108,94 @@
 
 #pragma mark - setter getter method -
 
-- (NSMutableDictionary *)imageDict
+- (NSMutableDictionary *)ct_Image_Dict
 {
     NSMutableDictionary * dict = objc_getAssociatedObject(self, _cmd);
     if (!dict) {
         dict = [@{} mutableCopy];
-        self.imageDict = dict;
+        self.ct_Image_Dict = dict;
     }
     return dict;
 }
 
-- (void)setImageDict:(NSMutableDictionary *)imageDict
+- (void)setCt_Image_Dict:(NSMutableDictionary *)ct_Image_Dict
 {
-    objc_setAssociatedObject(self, @selector(imageDict), imageDict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(ct_Image_Dict), ct_Image_Dict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NSMutableDictionary *)typeDict
+- (NSMutableDictionary *)ct_Type_Dict
 {
     NSMutableDictionary * dict = objc_getAssociatedObject(self, _cmd);
     if (!dict) {
         dict = [@{} mutableCopy];
-        self.typeDict = dict;
+        self.ct_Type_Dict = dict;
     }
     return dict;
 }
 
-- (void)setTypeDict:(NSMutableDictionary *)typeDict
+- (void)setCt_Type_Dict:(NSMutableDictionary *)ct_Type_Dict
 {
-    objc_setAssociatedObject(self, @selector(typeDict), typeDict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(ct_Type_Dict), ct_Type_Dict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NSMutableDictionary *)viewDict
+- (NSMutableDictionary *)ct_View_Dict
 {
     NSMutableDictionary * dict = objc_getAssociatedObject(self, _cmd);
     if (!dict) {
         dict = [@{} mutableCopy];
-        self.viewDict = dict;
+        self.ct_View_Dict = dict;
     }
     return dict;
 }
 
-- (void)setViewDict:(NSMutableDictionary *)viewDict
+- (void)setCt_View_Dict:(NSMutableDictionary *)ct_View_Dict
 {
-    objc_setAssociatedObject(self, @selector(viewDict), viewDict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(ct_View_Dict), ct_View_Dict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NSMutableDictionary *)textDict
+- (NSMutableDictionary *)ct_Text_Dict
 {
     NSMutableDictionary * dict = objc_getAssociatedObject(self, _cmd);
     if (!dict) {
         dict = [@{} mutableCopy];
-        self.textDict = dict;
+        self.ct_Text_Dict = dict;
     }
     return dict;
 }
 
-- (void)setTextDict:(NSMutableDictionary *)textDict
+- (void)setCt_Text_Dict:(NSMutableDictionary *)ct_Text_Dict
 {
-    objc_setAssociatedObject(self, @selector(textDict), textDict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(ct_Text_Dict), ct_Text_Dict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NSMutableDictionary *)offsetYDict
+- (NSMutableDictionary *)ct_OffsetY_Dict
 {
     NSMutableDictionary * dict = objc_getAssociatedObject(self, _cmd);
     if (!dict) {
         dict = [@{} mutableCopy];
-        self.offsetYDict = dict;
+        self.ct_OffsetY_Dict = dict;
     }
     return dict;
 }
 
-- (void)setOffsetYDict:(NSMutableDictionary *)offsetYDict
+- (void)setCt_OffsetY_Dict:(NSMutableDictionary *)ct_OffsetY_Dict
 {
-    objc_setAssociatedObject(self, @selector(offsetYDict), offsetYDict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(ct_OffsetY_Dict), ct_OffsetY_Dict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NSMutableDictionary *)spaceVDict
+- (NSMutableDictionary *)ct_Space_V_Dict
 {
     NSMutableDictionary * dict = objc_getAssociatedObject(self, _cmd);
     if (!dict) {
         dict = [@{} mutableCopy];
-        self.spaceVDict = dict;
+        self.ct_Space_V_Dict = dict;
     }
     return dict;
 }
 
-- (void)setSpaceVDict:(NSMutableDictionary *)spaceVDict
+- (void)setCt_Space_V_Dict:(NSMutableDictionary *)ct_Space_V_Dict
 {
-    objc_setAssociatedObject(self, @selector(spaceVDict), spaceVDict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(setCt_Space_V_Dict), ct_Space_V_Dict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (CTDispalyStatus)dispalyStatus
@@ -385,11 +379,11 @@
         [spuView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [obj removeFromSuperview];
         }];
-        CGFloat offsetY = [ct_valueForStatus(self.offsetYDict, status) floatValue];
+        CGFloat offsetY = [ct_valueForStatus(self.ct_OffsetY_Dict, status) floatValue];
         CGPoint center = CGPointMake(spuView.center.x,spuView.center.y+offsetY);
         UIView * contentView;
         
-        CGFloat type = [ct_valueForStatus(self.typeDict, status) integerValue];
+        CGFloat type = [ct_valueForStatus(self.ct_Type_Dict, status) integerValue];
         if (type != CTEmptyDefaultType)
         {
             contentView = [self specialDisplayContentWithCenter:center status:status];
@@ -407,32 +401,32 @@
 
 - (void)setEmptyDispalyImage:(UIImage *)emptyImage status:(CTDispalyStatus)status
 {
-    [self.imageDict setObject:emptyImage forKey:@(status)];
+    [self.ct_Image_Dict setObject:emptyImage forKey:@(status)];
 }
 
 - (void)setEmptyCustomView:(UIView *)customView status:(CTDispalyStatus)status
 {
-    [self.viewDict setObject:customView forKey:@(status)];
+    [self.ct_View_Dict setObject:customView forKey:@(status)];
 }
 
 - (void)setEmptyDispalyText:(NSAttributedString *)text status:(CTDispalyStatus)status
 {
-    [self.textDict setObject:text forKey:@(status)];
+    [self.ct_Text_Dict setObject:text forKey:@(status)];
 }
 
 - (void)setEmptyOffsetCenterY:(CGFloat)offCenterY status:(CTDispalyStatus)status
 {
-    [self.offsetYDict setObject:@(offCenterY) forKey:@(status)];
+    [self.ct_OffsetY_Dict setObject:@(offCenterY) forKey:@(status)];
 }
 
 - (void)setEmptyVerticalSpace:(CGFloat)space status:(CTDispalyStatus)status
 {
-    [self.spaceVDict setObject:@(space) forKey:@(status)];
+    [self.ct_Space_V_Dict setObject:@(space) forKey:@(status)];
 }
 
 - (void)setEmptyDispalyType:(CTEmptyDispalyType)type status:(CTDispalyStatus)status
 {
-    [self.typeDict setObject:@(type) forKey:@(status)];
+    [self.ct_Type_Dict setObject:@(type) forKey:@(status)];
 }
 #pragma mark - commom method -
 
@@ -455,7 +449,7 @@ id ct_valueForStatus(NSMutableDictionary * dict, CTDispalyStatus status)
 - (UILabel *)detailLableWithPosition:(CGPoint)position status:(CTDispalyStatus)status
 {
     UILabel * lab = [[UILabel alloc] init];
-    lab.attributedText = ct_valueForStatus(self.textDict, status);
+    lab.attributedText = ct_valueForStatus(self.ct_Text_Dict, status);
     [lab sizeToFit];
     lab.center = position;
     return lab;
@@ -463,7 +457,7 @@ id ct_valueForStatus(NSMutableDictionary * dict, CTDispalyStatus status)
 
 - (UIImageView *)imageViewWithPosition:(CGPoint)position status:(CTDispalyStatus)status
 {
-    UIImage * img = ct_valueForStatus(self.imageDict, status);
+    UIImage * img = ct_valueForStatus(self.ct_Image_Dict, status);
     CGSize size = img.size;
     CGFloat scale = img.scale;
     UIImageView * emptyIM = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width/scale, size.height/scale)];
@@ -477,18 +471,18 @@ id ct_valueForStatus(NSMutableDictionary * dict, CTDispalyStatus status)
 - (UIView *)specialDisplayContentWithCenter:(CGPoint)center status:(CTDispalyStatus)status
 {
     UIView * contentView = [[UIView alloc] init];
-    CGFloat space = [ct_valueForStatus(self.spaceVDict, status) floatValue];
-    CGFloat type = [ct_valueForStatus(self.typeDict, status) integerValue];
+    CGFloat space = [ct_valueForStatus(self.ct_Space_V_Dict, status) floatValue];
+    CGFloat type = [ct_valueForStatus(self.ct_Type_Dict, status) integerValue];
     
     
-    UIView * view = ct_valueForStatus(self.viewDict, status);
+    UIView * view = ct_valueForStatus(self.ct_View_Dict, status);
     
     if (type == CTEmptyCustomViewAndTextType)
     {
         if (view) {
             [contentView addSubview:view];
         }
-        if (ct_valueForStatus(self.textDict, status))
+        if (ct_valueForStatus(self.ct_Text_Dict, status))
         {
             UILabel * lab = [self detailLableWithPosition:CGPointZero status:status];
             CGPoint point = CGPointMake(EMPTY_MID_W(view), EMPTY_H(view)+EMPTY_MID_H(lab) + space);
@@ -502,7 +496,7 @@ id ct_valueForStatus(NSMutableDictionary * dict, CTDispalyStatus status)
             [contentView addSubview:view];
         }
 
-        if (ct_valueForStatus(self.imageDict, status))
+        if (ct_valueForStatus(self.ct_Image_Dict, status))
         {
             UIImageView * imv = [self imageViewWithPosition:CGPointZero status:status];
             CGPoint point = CGPointMake(EMPTY_MID_W(view), EMPTY_H(view)+EMPTY_MID_H(imv) + space);
@@ -513,13 +507,13 @@ id ct_valueForStatus(NSMutableDictionary * dict, CTDispalyStatus status)
     else if (type == CTEmptyImageAndTextType)
     {
         CGPoint point = CGPointZero;
-        if (ct_valueForStatus(self.imageDict, status))
+        if (ct_valueForStatus(self.ct_Image_Dict, status))
         {
             UIImageView * imv = [self imageViewWithPosition:CGPointZero status:status];
             [contentView addSubview:imv];
             point = CGPointMake(EMPTY_MID_W(imv), EMPTY_H(imv));
         }
-        if (ct_valueForStatus(self.textDict, status))
+        if (ct_valueForStatus(self.ct_Text_Dict, status))
         {
             UILabel * lab = [self detailLableWithPosition:CGPointZero status:status];
             lab.center = CGPointMake(point.x, point.y+EMPTY_MID_H(lab)+space);
@@ -529,7 +523,7 @@ id ct_valueForStatus(NSMutableDictionary * dict, CTDispalyStatus status)
     else if (type == CTEmptyImageAndCustomViewType)
     {
         CGPoint point = CGPointZero;
-        if (ct_valueForStatus(self.imageDict, status)) {
+        if (ct_valueForStatus(self.ct_Image_Dict, status)) {
             UIImageView * imv = [self imageViewWithPosition:CGPointZero status:status];
             [contentView addSubview:imv];
             point = CGPointMake(EMPTY_MID_W(imv), EMPTY_H(imv)+EMPTY_MID_H(view)+space);
@@ -542,7 +536,7 @@ id ct_valueForStatus(NSMutableDictionary * dict, CTDispalyStatus status)
     else if (type == CTEmptyTextAndCustomViewType)
     {
         CGPoint point = CGPointZero;
-        if (ct_valueForStatus(self.textDict, status))
+        if (ct_valueForStatus(self.ct_Text_Dict, status))
         {
             UILabel * lab = [self detailLableWithPosition:CGPointZero status:status];
             [contentView addSubview:lab];
@@ -556,13 +550,13 @@ id ct_valueForStatus(NSMutableDictionary * dict, CTDispalyStatus status)
     else if (type == CTEmptyTextAndImageType)
     {
         CGPoint point = CGPointZero;
-        if (ct_valueForStatus(self.textDict, status))
+        if (ct_valueForStatus(self.ct_Text_Dict, status))
         {
             UILabel * lab = [self detailLableWithPosition:CGPointZero status:status];
             point = CGPointMake(EMPTY_MID_W(lab), EMPTY_H(lab));
             [contentView addSubview:lab];
         }
-        if (ct_valueForStatus(self.imageDict, status))
+        if (ct_valueForStatus(self.ct_Image_Dict, status))
         {
             UIImageView * imv = [self imageViewWithPosition:CGPointZero status:status];
             imv.center = CGPointMake(point.x, point.y+EMPTY_MID_H(imv)+space);
@@ -581,13 +575,13 @@ id ct_valueForStatus(NSMutableDictionary * dict, CTDispalyStatus status)
 
 - (UIView *)generateDisplayContentWithCenter:(CGPoint)center status:(CTDispalyStatus)status
 {
-    if (ct_valueForStatus(self.viewDict,status))
+    if (ct_valueForStatus(self.ct_View_Dict,status))
     {
-        UIView * view = ct_valueForStatus(self.viewDict,status);
+        UIView * view = ct_valueForStatus(self.ct_View_Dict,status);
         view.center = center;
         return view;
     }
-    else if (ct_valueForStatus(self.imageDict,status))
+    else if (ct_valueForStatus(self.ct_Image_Dict,status))
     {
         UIImageView * emptyIM = [self imageViewWithPosition:center status:status];
         return emptyIM;
