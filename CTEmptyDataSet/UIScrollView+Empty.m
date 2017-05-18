@@ -195,7 +195,7 @@
 
 - (void)setCt_Space_V_Dict:(NSMutableDictionary *)ct_Space_V_Dict
 {
-    objc_setAssociatedObject(self, @selector(setCt_Space_V_Dict), ct_Space_V_Dict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(ct_Space_V_Dict), ct_Space_V_Dict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (CTDispalyStatus)dispalyStatus
