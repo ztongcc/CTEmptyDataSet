@@ -51,13 +51,13 @@
                                inClass:[UITableView class]];
         
         NSArray * orgTableSelAry = @[@"endUpdates",
-                                    @"reloadSections:withRowAnimation:",
-                                    @"reloadRowsAtIndexPaths:withRowAnimation:",
-                                    @"deleteSections:withRowAnimation:",
-                                    @"deleteRowsAtIndexPaths:withRowAnimation:",
-                                    @"insertRowsAtIndexPaths:withRowAnimation:",
-                                    @"insertSections:withRowAnimation:"];
-
+                                     @"reloadSections:withRowAnimation:",
+                                     @"reloadRowsAtIndexPaths:withRowAnimation:",
+                                     @"deleteSections:withRowAnimation:",
+                                     @"deleteRowsAtIndexPaths:withRowAnimation:",
+                                     @"insertRowsAtIndexPaths:withRowAnimation:",
+                                     @"insertSections:withRowAnimation:"];
+        
         for (NSString * selName in orgTableSelAry)
         {
             NSString * newSelName = [NSString stringWithFormat:@"empty_%@", selName];
@@ -354,8 +354,7 @@
 
 - (void)empty_insertSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)animation
 {
-    [self empty_insertRowsAtIndexPaths:sections withRowAnimation:animation];
-    
+    [self empty_insertSections:sections withRowAnimation:animation];
     [self autoDispayEmptyView];
 }
 
@@ -381,18 +380,16 @@
         }];
         CGFloat offsetY = [ct_valueForStatus(self.ct_OffsetY_Dict, status) floatValue];
         CGPoint center = CGPointMake(spuView.center.x,spuView.center.y+offsetY);
-        UIView * contentView;
         
         CGFloat type = [ct_valueForStatus(self.ct_Type_Dict, status) integerValue];
         if (type != CTEmptyDefaultType)
         {
-            contentView = [self specialDisplayContentWithCenter:center status:status];
+            [self specialDisplayView:spuView center:center status:status];
         }
         else
         {
-            contentView = [self generateDisplayContentWithCenter:center status:status];
+            [self generateDisplayView:spuView center:center status:status];
         }
-        [spuView addSubview:contentView];
         if (self.empty_willDispalyStatusBlock) {
             self.empty_willDispalyStatusBlock(spuView,status);
         }
@@ -459,8 +456,7 @@ id ct_valueForStatus(NSMutableDictionary * dict, CTDispalyStatus status)
 {
     UIImage * img = ct_valueForStatus(self.ct_Image_Dict, status);
     CGSize size = img.size;
-    CGFloat scale = img.scale;
-    UIImageView * emptyIM = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width/scale, size.height/scale)];
+    UIImageView * emptyIM = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     emptyIM.backgroundColor = [UIColor clearColor];
     emptyIM.contentMode = UIViewContentModeScaleAspectFill;
     emptyIM.image = img;
@@ -468,129 +464,111 @@ id ct_valueForStatus(NSMutableDictionary * dict, CTDispalyStatus status)
     return emptyIM;
 }
 
-- (UIView *)specialDisplayContentWithCenter:(CGPoint)center status:(CTDispalyStatus)status
+- (void)specialDisplayView:(UIView *)supView center:(CGPoint)center status:(CTDispalyStatus)status
 {
-    UIView * contentView = [[UIView alloc] init];
     CGFloat space = [ct_valueForStatus(self.ct_Space_V_Dict, status) floatValue];
     CGFloat type = [ct_valueForStatus(self.ct_Type_Dict, status) integerValue];
     
     
-    UIView * view = ct_valueForStatus(self.ct_View_Dict, status);
+    UIView * customView = ct_valueForStatus(self.ct_View_Dict, status);
+    UIImageView * imv = [self imageViewWithPosition:CGPointZero status:status];
+    UILabel * lab = [self detailLableWithPosition:CGPointZero status:status];
+    
+    UIView * upSideView;
+    UIView * downSideView;
+    
     
     if (type == CTEmptyCustomViewAndTextType)
     {
-        if (view) {
-            [contentView addSubview:view];
-        }
-        if (ct_valueForStatus(self.ct_Text_Dict, status))
-        {
-            UILabel * lab = [self detailLableWithPosition:CGPointZero status:status];
-            CGPoint point = CGPointMake(EMPTY_MID_W(view), EMPTY_H(view)+EMPTY_MID_H(lab) + space);
-            lab.center = point;
-            [contentView addSubview:lab];
-        }
+        [supView addSubview:customView];
+        [supView addSubview:lab];
+        
+        upSideView = customView;
+        downSideView = lab;
     }
     else if (type == CTEmptyCustomViewAndImageType)
     {
-        if (view) {
-            [contentView addSubview:view];
-        }
-
-        if (ct_valueForStatus(self.ct_Image_Dict, status))
-        {
-            UIImageView * imv = [self imageViewWithPosition:CGPointZero status:status];
-            CGPoint point = CGPointMake(EMPTY_MID_W(view), EMPTY_H(view)+EMPTY_MID_H(imv) + space);
-            imv.center = point;
-            [contentView addSubview:imv];
-        }
+        [supView addSubview:customView];
+        [supView addSubview:imv];
+        
+        upSideView = customView;
+        downSideView = imv;
+        
     }
     else if (type == CTEmptyImageAndTextType)
     {
-        CGPoint point = CGPointZero;
-        if (ct_valueForStatus(self.ct_Image_Dict, status))
-        {
-            UIImageView * imv = [self imageViewWithPosition:CGPointZero status:status];
-            [contentView addSubview:imv];
-            point = CGPointMake(EMPTY_MID_W(imv), EMPTY_H(imv));
-        }
-        if (ct_valueForStatus(self.ct_Text_Dict, status))
-        {
-            UILabel * lab = [self detailLableWithPosition:CGPointZero status:status];
-            lab.center = CGPointMake(point.x, point.y+EMPTY_MID_H(lab)+space);
-            [contentView addSubview:lab];
-        }
+        [supView addSubview:imv];
+        [supView addSubview:lab];
+        
+        upSideView = imv;
+        downSideView = lab;
     }
     else if (type == CTEmptyImageAndCustomViewType)
     {
-        CGPoint point = CGPointZero;
-        if (ct_valueForStatus(self.ct_Image_Dict, status)) {
-            UIImageView * imv = [self imageViewWithPosition:CGPointZero status:status];
-            [contentView addSubview:imv];
-            point = CGPointMake(EMPTY_MID_W(imv), EMPTY_H(imv)+EMPTY_MID_H(view)+space);
-        }
-        if (view) {
-            view.center = point;
-            [contentView addSubview:view];
-        }
+        [supView addSubview:imv];
+        [supView addSubview:customView];
+        
+        upSideView = imv;
+        downSideView = customView;
     }
     else if (type == CTEmptyTextAndCustomViewType)
     {
-        CGPoint point = CGPointZero;
-        if (ct_valueForStatus(self.ct_Text_Dict, status))
-        {
-            UILabel * lab = [self detailLableWithPosition:CGPointZero status:status];
-            [contentView addSubview:lab];
-            point = CGPointMake(EMPTY_MID_W(lab), EMPTY_H(lab)+EMPTY_MID_H(view)+space);
-        }
-        if (view) {
-            view.center = point;
-            [contentView addSubview:view];
-        }
+        [supView addSubview:lab];
+        [supView addSubview:customView];
+        
+        upSideView = lab;
+        downSideView = customView;
     }
     else if (type == CTEmptyTextAndImageType)
     {
-        CGPoint point = CGPointZero;
-        if (ct_valueForStatus(self.ct_Text_Dict, status))
-        {
-            UILabel * lab = [self detailLableWithPosition:CGPointZero status:status];
-            point = CGPointMake(EMPTY_MID_W(lab), EMPTY_H(lab));
-            [contentView addSubview:lab];
-        }
-        if (ct_valueForStatus(self.ct_Image_Dict, status))
-        {
-            UIImageView * imv = [self imageViewWithPosition:CGPointZero status:status];
-            imv.center = CGPointMake(point.x, point.y+EMPTY_MID_H(imv)+space);
-            [contentView addSubview:imv];
-        }
+        [supView addSubview:lab];
+        [supView addSubview:imv];
+        
+        upSideView = lab;
+        downSideView = imv;
     }
-    __block CGSize size;
-    [contentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        size.width = fmaxf(size.width, EMPTY_W(obj));
-        size.height = fmaxf(size.height, EMPTY_B(obj));
-    }];
-    contentView.frame = CGRectMake(0, 0, size.width, size.height);
-    contentView.center = center;
-    return contentView;
+    
+    if ((!downSideView || EMPTY_H(downSideView) == 0) &&
+        (!upSideView || EMPTY_H(upSideView) == 0))
+    {
+        return;
+    }
+    
+    if (downSideView && EMPTY_H(downSideView) > 0 && upSideView && EMPTY_H(downSideView) > 0)
+    {
+        upSideView.center = CGPointMake(center.x, center.y - (EMPTY_H(upSideView)+EMPTY_H(downSideView) + space)/2.0 + EMPTY_MID_H(upSideView));
+        downSideView.center = CGPointMake(center.x, upSideView.center.y+EMPTY_MID_H(upSideView)+EMPTY_MID_H(downSideView) + space);
+    }
+    
+    if (!downSideView || EMPTY_H(downSideView) == 0)
+    {
+        upSideView.center = center;
+    }
+    
+    if (!upSideView || EMPTY_H(upSideView) == 0)
+    {
+        downSideView.center = center;
+    }
+    
 }
 
-- (UIView *)generateDisplayContentWithCenter:(CGPoint)center status:(CTDispalyStatus)status
+- (void)generateDisplayView:(UIView *)supView center:(CGPoint)center status:(CTDispalyStatus)status
 {
+    UIView * emptyView;
     if (ct_valueForStatus(self.ct_View_Dict,status))
     {
-        UIView * view = ct_valueForStatus(self.ct_View_Dict,status);
-        view.center = center;
-        return view;
+        emptyView = ct_valueForStatus(self.ct_View_Dict,status);
     }
     else if (ct_valueForStatus(self.ct_Image_Dict,status))
     {
-        UIImageView * emptyIM = [self imageViewWithPosition:center status:status];
-        return emptyIM;
+        emptyView = [self imageViewWithPosition:center status:status];
     }
     else
     {
-        UILabel * lab = [self detailLableWithPosition:center status:status];
-        return lab;
+        emptyView = [self detailLableWithPosition:center status:status];
     }
+    emptyView.center = center;
+    [supView addSubview:emptyView];
 }
 
 - (UIView *)displayView
@@ -632,6 +610,12 @@ id ct_valueForStatus(NSMutableDictionary * dict, CTDispalyStatus status)
     else if ([self isKindOfClass:[UITableView class]])
     {
         UITableView * tableView = (UITableView *)self;
+        if (tableView.tableHeaderView && CGRectGetHeight(tableView.tableHeaderView.frame) > 0) {
+            return NO;
+        }
+        if (tableView.tableFooterView && CGRectGetHeight(tableView.tableFooterView.frame) > 0) {
+            return NO;
+        }
         NSInteger section = tableView.numberOfSections;
         for (int i = 0; i < section; i++)
         {
